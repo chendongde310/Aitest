@@ -5,15 +5,12 @@ package cn.com.cdgame.aitest.alice;
  * Time：2017/7/21 - 下午2:44
  * Notes: 这是一个基础的人工智障，如果要创建新的人物，就继承他，他是所有智障的母亲
  *
+ *
  */
 
 public class Alice {
 
-    public static Alice A9 = new Alice();
 
-    public static Alice getFristAlice() {
-        return A9;
-    }
 
     public String respond(String input) {
         Response response = respond(new Request(input));

@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.hankcs.hanlp.HanLP;
 
-import cn.com.cdgame.aitest.alice.Alice;
-
 public class MainActivity extends AppCompatActivity {
 
     private android.widget.TextView textView;
@@ -41,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 HanLP.Config.ShowTermNature = false;
-                Alice bot = Alice.getFristAlice();
-                textView.setText(String.format("A9>%s", bot.respond(editText.getText().toString())));
+
+
+
+          //      textView.setText(String.format("A9>%s", bot.respond(editText.getText().toString())));
 
                 // System.out.println(HanLP.segment(editText.getText().toString()));
 
