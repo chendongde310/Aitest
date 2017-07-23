@@ -1,0 +1,42 @@
+
+<alice>
+    <data>
+        <name>A9</name>
+        <gender>女</gender>
+        <age>19</age>
+        <job>战士</job>
+    </data>
+
+    <respond>
+
+        <item input="你好" type="pe">
+            <output>你好</output>
+            <output>你好,@call</output>
+        </item>
+
+        <item input="再见" type="pe">
+            <output>再见</output>
+            <output>再见,@call</output>
+        </item>
+
+        <item input="早上好" type="pe">
+            <output condition="time_morning">早上好</output>
+            <output condition="time_morning">早上好,@call</output>
+        </item>
+
+        <item input="晚安" type="pe">
+            <output condition="time_night">晚安</output>
+            <output condition="time_night">晚安,@call</output>
+        </item>
+
+
+        <item input="陆行鸟" type="b">
+            <output condition="time_night">在猎人营地</output>
+        </item>
+
+    </respond>
+
+
+</alice>
+
+
