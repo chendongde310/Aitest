@@ -44,23 +44,7 @@ public class AliceHandler {
         return ourInstance;
     }
 
-    private void loadXml2() throws IOException, DocumentException {
-        SAXReader reader = new SAXReader();
-        Document document = reader.read(App.app.getAssets().open("A9.xml"));
-        aliceR = new Respond();
-        for (Element e : document.getRootElement().elements("respond")) {
-            Respond.Item item = new Respond.Item();
-            item.input = e.attributeValue("input");
-            item.type = e.attributeValue("type");
-            for (Element out : e.elements("output")) {
-                Respond.Item.Output output = new Respond.Item.Output();
-                output.output = out.getTextTrim();
-                output.condition = new Condition(out.attributeValue("condition"));
-                item.outputList.add(output);
-            }
-            aliceR.items.add(item);
-        }
-    }
+
 
     public void loadXml() throws IOException, DocumentException {
         SAXReader reader = new SAXReader();
@@ -88,6 +72,11 @@ public class AliceHandler {
 
 //[^x00-xff]
 
+    /**
+     * 匹配
+     * @param request
+     * @return
+     */
     public Respond.Item matching(String request) {
         List<Term> terms = HanLP.segment(request);
         System.out.println(terms);

@@ -17,10 +17,30 @@ public class Response {
         for (int i = 0; i < requests.length; i++) {
             Respond.Item item = AliceHandler.getInstance().matching(requests[i]);
             if (item != null) {
-                String s = item.outputList.get(0).output;
-                stringBuffer.append(s+(stringBuffer.length()>0?",":""));
+
+                String s = item.outputList.get(random(item.outputList.size())).output;
+
+                stringBuffer.append(escape(s) + (stringBuffer.length() > 0 ? "," : ""));
             }
         }
+    }
+
+    /**
+     * 转义
+     *
+     * @param s
+     */
+    private String escape(String s) {
+      return  s.replace("@call","朋友");
+    }
+
+
+    private int random(int size) {
+        int index = (int) (Math.random() * size);
+        if (index >= size) {
+            index = size - 1;
+        }
+        return index;
     }
 
 

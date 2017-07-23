@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 HanLP.Config.ShowTermNature = false;
                 Alice bot = Alice.getFristAlice();
                 textView.setText(String.format("A9>%s", bot.respond(editText.getText().toString())));
-//
+
                 // System.out.println(HanLP.segment(editText.getText().toString()));
 
 
