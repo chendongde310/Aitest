@@ -9,7 +9,7 @@
 
     <respond>
 
-        <form src = "respond/base"/>
+        <form src = "respond/base.xml"/>
 
         <item input="爱丽丝" >
             <output>爱丽丝是我的母亲</output>

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-              //  HanLP.segment("hi");
+              HanLP.segment("hi");
               runOnUiThread(new Runnable() {
                   @Override
                   public void run() {

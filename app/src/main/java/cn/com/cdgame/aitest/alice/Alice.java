@@ -10,6 +10,7 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.cdgame.aitest.bean.Condition;
@@ -30,6 +31,7 @@ public class Alice {
     Job job;
     Emotion emotion;
     Friendliness friendliness;
+    Respond aliceR;
 
     public Alice() {
     }
@@ -42,11 +44,15 @@ public class Alice {
         job = b.job;
         emotion = b.emotion;
         friendliness = b.friendliness;
+        aliceR = b.aliceR;
     }
 
     public void talk(String request, TalkCallback talkCallback) {
-        talkCallback.respond(request);
+        talkCallback.respond( new Response(new Request(request).getRequest(),aliceR).toText());
     }
+
+
+
 
 
     public interface TalkCallback {
@@ -73,27 +79,18 @@ public class Alice {
             try {
                 SAXReader reader = new SAXReader();
                 Document document = reader.read(context.getApplicationContext().getAssets().open(dataXmlPath));
-                aliceR = new Respond();
+
                 Element data = document.getRootElement().element("data");
                 name = data.elementText("name");
                 gender = data.elementText("gender");
                 age = data.elementText("age");
                 job = ModleHandler.Job().load((data.elementText("job")));
-                List<Element> es = document.getRootElement().elements("respond").get(0).elements("item");
-                for (int i = 0; i < es.size(); i++) {
-                    Respond.Item item = new Respond.Item();
-                    item.input = es.get(i).attributeValue("input");
-                    CustomDictionary.insert(item.input);
-                    item.type = es.get(i).attributeValue("type");
-                    List<Element> out = es.get(i).elements("output");
-                    for (int j = 0; j < out.size(); j++) {
-                        Respond.Item.Output output = new Respond.Item.Output();
-                        output.output = out.get(j).getTextTrim();
-                        output.condition = new Condition(out.get(j).attributeValue("condition"));
-                        item.outputList.add(output);
-                    }
-                    aliceR.items.add(item);
+                aliceR = new Respond();
+                Element respond = document.getRootElement().element("respond");
+                for (Element path : respond.elements("form")) {
+                    aliceR.items.addAll(loadRespond(path.attributeValue("src")));
                 }
+                aliceR.items.addAll(loadRespond(respond));
             } catch (DocumentException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -101,6 +98,43 @@ public class Alice {
             }
             return this;
         }
+
+        private List<Respond.Item> loadRespond(String path) throws IOException, DocumentException {
+            if (path != null) {
+                SAXReader reader = new SAXReader();
+                Document document = reader.read(context.getApplicationContext().getAssets().open(path));
+                return loadRespond(document.getRootElement());
+            }else {
+                return null;
+            }
+        }
+
+        /**
+         * 获取对话列表
+         *
+         * @param respond
+         * @return
+         */
+        private List<Respond.Item> loadRespond(Element respond) {
+            List<Element> responds = respond.elements("item");
+            List<Respond.Item> items = new ArrayList<>();
+            for (int i = 0; i < responds.size(); i++) {
+                Respond.Item item = new Respond.Item();
+                item.input = responds.get(i).attributeValue("input");
+                CustomDictionary.insert(item.input);
+                item.type = responds.get(i).attributeValue("type");
+                List<Element> out = responds.get(i).elements("output");
+                for (int j = 0; j < out.size(); j++) {
+                    Respond.Item.Output output = new Respond.Item.Output();
+                    output.output = out.get(j).getTextTrim();
+                    output.condition = new Condition(out.get(j).attributeValue("condition"));
+                    item.outputList.add(output);
+                }
+                items.add(item);
+            }
+            return items;
+        }
+
 
         public Bulider name(String name) {
             this.name = name;
