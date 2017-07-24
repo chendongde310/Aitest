@@ -65,9 +65,6 @@ public class AliceHandler {
             }
             aliceR.items.add(item);
         }
-
-
-
     }
 
 //[^x00-xff]

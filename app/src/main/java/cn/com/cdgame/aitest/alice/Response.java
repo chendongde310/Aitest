@@ -31,7 +31,7 @@ public class Response {
      * @param s
      */
     private String escape(String s) {
-      return  s.replace("@call","朋友");
+        return s.replace("@call", "朋友");
     }
 
 
