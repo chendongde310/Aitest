@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.com.cdgame.aitest.bean.Condition;
 import cn.com.cdgame.aitest.bean.Respond;
+import cn.com.cdgame.aitest.modle.ModleHandler;
 
 /**
  * Author：陈东
@@ -30,8 +31,10 @@ public class Alice {
     Emotion emotion;
     Friendliness friendliness;
 
+    public Alice() {
+    }
 
-    public Alice(Bulider b) {
+    private Alice(Bulider b) {
         context = b.context;
         name = b.name;
         gender = b.gender;
@@ -39,7 +42,15 @@ public class Alice {
         job = b.job;
         emotion = b.emotion;
         friendliness = b.friendliness;
+    }
 
+    public void talk(String request, TalkCallback talkCallback) {
+        talkCallback.respond(request);
+    }
+
+
+    public interface TalkCallback {
+        void respond(String respond);
     }
 
     public static class Bulider {
@@ -61,13 +72,13 @@ public class Alice {
         public Bulider loadDataXml(String dataXmlPath) {
             try {
                 SAXReader reader = new SAXReader();
-                Document document = reader.read(context.getAssets().open(dataXmlPath));
+                Document document = reader.read(context.getApplicationContext().getAssets().open(dataXmlPath));
                 aliceR = new Respond();
                 Element data = document.getRootElement().element("data");
-                name  = data.elementText("name");
-                gender  = data.elementText("gender");
-                age  = data.elementText("age");
-                job  = Job.loadXml(context,data.elementText("job"));
+                name = data.elementText("name");
+                gender = data.elementText("gender");
+                age = data.elementText("age");
+                job = ModleHandler.Job().load((data.elementText("job")));
                 List<Element> es = document.getRootElement().elements("respond").get(0).elements("item");
                 for (int i = 0; i < es.size(); i++) {
                     Respond.Item item = new Respond.Item();
@@ -127,12 +138,6 @@ public class Alice {
         }
 
 
-        private void loadXml() throws IOException, DocumentException {
-
-        }
-
-
     }
-
 
 }

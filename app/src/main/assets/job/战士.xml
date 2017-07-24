@@ -1,17 +1,17 @@
-<job >
-    <item name="初阶战士" id="job100001" lv="1">
+<job>
+    <item name="初阶战士" id="job100001" lv="1" depict = "初阶的菜鸟战士">
         <attribute name="力量" value="10" />
         <attribute name="敏捷" value="5" />
         <attribute name="智力" value="6" />
     </item>
 
-    <item name="二阶战士" id="job100002" lv="2">
+    <item name="二阶战士" id="job100002" lv="2" depict = "二阶的菜鸟战士">
         <attribute name="力量" value="20" />
         <attribute name="敏捷" value="15" />
         <attribute name="智力" value="16" />
     </item>
 
-    <item name="三阶战士" id="job100003" lv="3">
+    <item name="三阶战士" id="job100003" lv="3" depict = "三阶的菜鸟战士">
         <attribute name="力量" value="30" />
         <attribute name="敏捷" value="25" />
         <attribute name="智力" value="26" />

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.hankcs.hanlp.HanLP;
 
+import cn.com.cdgame.aitest.alice.Alice;
+
 public class MainActivity extends AppCompatActivity {
 
     private android.widget.TextView textView;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                HanLP.segment("hi");
+              //  HanLP.segment("hi");
               runOnUiThread(new Runnable() {
                   @Override
                   public void run() {
@@ -34,17 +36,25 @@ public class MainActivity extends AppCompatActivity {
               });
             }
         }).start();
-
+        final Alice  A9 = new Alice.Bulider(MainActivity.this)
+                .loadDataXml("A9.xml")
+                .build() ;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HanLP.Config.ShowTermNature = false;
+                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
+                    @Override
+                    public void respond(String respond) {
+                        textView.setText(String.format("A9>%s", respond));
+                    }
+                }) ;
 
-
-
-          //      textView.setText(String.format("A9>%s", bot.respond(editText.getText().toString())));
+               //  textView.setText(String.format("A9>%s", A9.respond(editText.getText().toString())));
 
                 // System.out.println(HanLP.segment(editText.getText().toString()));
+
+
 
 
             }

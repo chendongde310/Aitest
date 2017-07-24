@@ -2,13 +2,9 @@ package cn.com.cdgame.aitest.modle;
 
 import android.content.Context;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
-import java.io.IOException;
-import java.util.List;
+import cn.com.cdgame.aitest.alice.Job;
 
 /**
  * Author：陈东
@@ -16,23 +12,38 @@ import java.util.List;
  * Notes:职业模型
  */
 
-public class JobModle {
+public class JobModle extends BaseModle<Job> {
+
+    private static final String HOST_PATH = "job";
+    private static final String[] JOB_PATH = {"战士"};
 
 
-    public static void init(Context context ) {
-        SAXReader reader = new SAXReader();
-        try {
-            Document document = reader.read(context.getAssets().open("job/" +  "战士" + ".xml"));
-            List<Element> items = document.getRootElement().elements("item");
-            for (Element e : items) {
+    JobModle(Context context) {
+        super(context);
+    }
 
-            }
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new NullPointerException("加载xml数据失败,请检查jobPath");
+    @Override
+    protected String getHostPath() {
+        return HOST_PATH;
+    }
+
+
+    @Override
+    String[] getDataPath() {
+        return JOB_PATH;
+    }
+
+    @Override
+    protected Job Xml2Bean(Element e) {
+        Job job = Job.base();
+        job.setJobId(e.attributeValue("id"));
+        job.setJobName(e.attributeValue("name"));
+        job.setJobLv(e.attributeValue("lv"));
+        job.setJobDepict(e.attributeValue("depict"));
+        for (Element attr : e.elements("attribute")) {
+            job.addAttribute(new Job.Attribute(attr.attributeValue("name"), attr.attributeValue("value")));
         }
-
+        return job;
     }
 
 
