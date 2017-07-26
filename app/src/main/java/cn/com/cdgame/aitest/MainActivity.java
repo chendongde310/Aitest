@@ -32,15 +32,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(HanLP.extractSummary(editText.getText().toString(),4));
-                System.out.println(HanLP.extractKeyword(editText.getText().toString(),4));
-                System.out.println(HanLP.getSummary(editText.getText().toString(),4));
-                System.out.println(HanLP.extractPhrase(editText.getText().toString(),4));
-              //  System.out.println(HanLP.parseDependency(editText.getText().toString()));
-
-
-
-
+                System.out.println("提取关键词"+HanLP.extractKeyword(editText.getText().toString(),4));
+                System.out.println("提取短语"+HanLP.extractPhrase(editText.getText().toString(),4));
 
 //                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
 //                    @Override
