@@ -48,6 +48,7 @@ public class Alice {
     }
 
     public void talk(String request, TalkCallback talkCallback) {
+
         talkCallback.respond( new Response(new Request(request).getRequest(),aliceR).toText());
     }
 

@@ -24,37 +24,30 @@ public class MainActivity extends AppCompatActivity {
         this.button = (Button) findViewById(R.id.button);
         this.editText = (EditText) findViewById(R.id.editText);
         this.textView = (TextView) findViewById(R.id.textView);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-              HanLP.segment("hi");
-              runOnUiThread(new Runnable() {
-                  @Override
-                  public void run() {
-                      textView.setText(String.format("A9>%s", "初始化完成"));
-                  }
-              });
-            }
-        }).start();
-        final Alice  A9 = new Alice.Bulider(MainActivity.this)
+
+
+        final Alice A9 = new Alice.Bulider(MainActivity.this)
                 .loadDataXml("A9.xml")
-                .build() ;
+                .build();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HanLP.Config.ShowTermNature = false;
-                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
-                    @Override
-                    public void respond(String respond) {
-                        textView.setText(String.format("A9>%s", respond));
-                    }
-                }) ;
-
-               //  textView.setText(String.format("A9>%s", A9.respond(editText.getText().toString())));
-
-                // System.out.println(HanLP.segment(editText.getText().toString()));
+                System.out.println(HanLP.extractSummary(editText.getText().toString(),4));
+                System.out.println(HanLP.extractKeyword(editText.getText().toString(),4));
+                System.out.println(HanLP.getSummary(editText.getText().toString(),4));
+                System.out.println(HanLP.extractPhrase(editText.getText().toString(),4));
+              //  System.out.println(HanLP.parseDependency(editText.getText().toString()));
 
 
+
+
+
+//                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
+//                    @Override
+//                    public void respond(String respond) {
+//                        textView.setText(String.format("A9>%s", respond));
+//                    }
+//                });
 
 
             }

@@ -3,9 +3,7 @@ package cn.com.cdgame.aitest.alice;
 import android.text.TextUtils;
 
 import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.seg.common.Term;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +27,7 @@ public class Response {
 
                 String s = item.outputList.get(random(item.outputList.size())).output;
 
-                stringBuffer.append(escape(s) + (stringBuffer.length() > 0 ? "," : ""));
+                stringBuffer.append((stringBuffer.length() > 0 ? "," : "") + escape(s) );
             }
         }
     }
@@ -66,12 +64,15 @@ public class Response {
      * @return
      */
     public Respond.Item matching(String request, Respond aliceR) {
-        List<Term> terms = HanLP.segment(request);
-        System.out.println(terms);
+      //  List<Term> terms = HanLP.segment(request);
+//        System.out.println(HanLP.segment(request));
+
         for (int i = 0; i < aliceR.items.size(); i++) {
             if (!TextUtils.isEmpty(aliceR.items.get(i).input)){
                 Pattern p = Pattern.compile(aliceR.items.get(i).input);
-                Matcher m = p.matcher(terms.get(0).word);
+//                Matcher m = p.matcher(terms.get(0).word);
+                Matcher m =  p.matcher(HanLP.extractKeyword(request,1).get(0));
+
                 if (m.find()) {
                     return aliceR.items.get(i);
                 }
