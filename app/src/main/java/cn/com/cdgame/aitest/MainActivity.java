@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.hankcs.hanlp.HanLP;
-
 import cn.com.cdgame.aitest.alice.Alice;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,17 +30,15 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("提取关键词"+HanLP.extractKeyword(editText.getText().toString(),4));
-                System.out.println("提取短语"+HanLP.extractPhrase(editText.getText().toString(),4));
-
-//                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
-//                    @Override
-//                    public void respond(String respond) {
-//                        textView.setText(String.format("A9>%s", respond));
-//                    }
-//                });
-
-
+//                System.out.println("提取关键词"+HanLP.extractKeyword(editText.getText().toString(),4));
+//                System.out.println("提取短语"+HanLP.extractPhrase(editText.getText().toString(),4));
+//
+                A9.talk(editText.getText().toString(), new Alice.TalkCallback() {
+                    @Override
+                    public void respond(String respond) {
+                        textView.setText(String.format("A9>%s", respond));
+                    }
+                });
             }
         });
 
