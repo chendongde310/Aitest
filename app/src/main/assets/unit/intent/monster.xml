@@ -1,7 +1,7 @@
 <intents>
 
 
-    <intent name="query_monster_info" depict="想知道某个怪物的信息">
+    <intent name="query_monster_info" depict="想知道某个怪物的信息"  mode = "function" reply = "正在查询"  error = "抱歉，我不知道" >
         <slots>
             <slot name="monster_name" depict="怪物名称" error="我从未听说有这种怪物，是不是你弄错了？" lib="monster"
                 needful="0">
@@ -43,6 +43,10 @@
             </sample>
 
         </samples>
+
+
+
+
     </intent>
 
 
