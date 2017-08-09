@@ -19,15 +19,15 @@ public class Response {
 
     StringBuffer stringBuffer;
 
-    public Response(String[] requests,Respond aliceR) {
+    public Response(String[] requests,Alice alice) {
         stringBuffer = new StringBuffer();
         for (int i = 0; i < requests.length; i++) {
-            Respond.Item item =matching(requests[i],aliceR);
+            Respond.Item item =matching(requests[i],alice.aliceR);
             if (item != null) {
 
                 String s = item.outputList.get(random(item.outputList.size())).output;
 
-                stringBuffer.append((stringBuffer.length() > 0 ? "," : "") + escape(s) );
+                stringBuffer.append((stringBuffer.length() > 0 ? "," : "") + escape(s,alice) );
             }
         }
     }
@@ -36,9 +36,12 @@ public class Response {
      * 转义
      *
      * @param s
+     * @param alice
      */
-    private String escape(String s) {
-        return s.replace("@call", "朋友");
+    private String escape(String s, Alice alice) {
+        return s.replace("@call", "朋友")
+                .replace("@name",alice.name)
+                .replace("@job",alice.job.getJobName());
     }
 
 

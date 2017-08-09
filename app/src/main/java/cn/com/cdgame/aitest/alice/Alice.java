@@ -49,16 +49,14 @@ public class Alice {
 
     public void talk(String request, TalkCallback talkCallback) {
 
-        talkCallback.respond( new Response(new Request(request).getRequest(),aliceR).toText());
+        talkCallback.respond( new Response(new Request(request).getRequest(),this).toText());
     }
 
 
 
 
 
-    public interface TalkCallback {
-        void respond(String respond);
-    }
+
 
     public static class Bulider {
         Context context;
@@ -104,6 +102,7 @@ public class Alice {
             if (path != null) {
                 SAXReader reader = new SAXReader();
                 Document document = reader.read(context.getApplicationContext().getAssets().open(path));
+
                 return loadRespond(document.getRootElement());
             }else {
                 return null;
@@ -116,9 +115,13 @@ public class Alice {
          * @param respond
          * @return
          */
-        private List<Respond.Item> loadRespond(Element respond) {
-            List<Element> responds = respond.elements("item");
+        private List<Respond.Item> loadRespond(Element respond) throws IOException, DocumentException {
             List<Respond.Item> items = new ArrayList<>();
+            for (Element p : respond.elements("form")) {
+                items.addAll(loadRespond(p.attributeValue("src")));
+            }
+            List<Element> responds = respond.elements("item");
+
             for (int i = 0; i < responds.size(); i++) {
                 Respond.Item item = new Respond.Item();
                 item.input = responds.get(i).attributeValue("input");

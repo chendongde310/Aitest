@@ -1,6 +1,7 @@
 <respond>
 
 
+    <form src = "respond/default.xml"/>
 
     <item input="你好" type="pe">
         <output>你好</output>

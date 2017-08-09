@@ -1,0 +1,29 @@
+<intents>
+
+
+    <intent name="query_time" depict="想知道现在的时间">
+        <slots>
+            <slot name="is_know_time" depict="判断是否知道时间" error="抱歉，我不知道当前时间">
+                <a />
+                <a />
+                <a />
+            </slot>
+            <slot name="is_want" depict="判断是否想回答对方这个问题" error="抱歉，我并不想回答你">
+                <a />
+            </slot>
+        </slots>
+
+        <samples >
+                <sample name = "几点了">
+
+
+
+                </sample>
+
+
+
+        </samples>
+    </intent>
+
+
+</intents>

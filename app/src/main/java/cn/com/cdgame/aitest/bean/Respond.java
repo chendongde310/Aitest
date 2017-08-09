@@ -16,14 +16,14 @@ public class Respond {
 
     public static class Item {
         public String input;
-        public String type;
+        public String type;   //
         public List<Output> outputList = new ArrayList<>();
 
 
         public static class Output {
 
-            public Condition condition;
-            public String output;
+            public Condition condition; //限制条件，
+            public String output; //输出
         }
     }
 

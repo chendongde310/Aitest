@@ -15,7 +15,7 @@ import cn.com.cdgame.aitest.alice.Job;
 public class JobModle extends BaseModle<Job> {
 
     private static final String HOST_PATH = "job";
-    private static final String[] JOB_PATH = {"战士"};
+    private static final String[] JOB_PATH = {"战士","刺客"};
 
 
     JobModle(Context context) {

@@ -4,19 +4,18 @@
         <name>A9</name>
         <gender>女</gender>
         <age>19</age>
-        <job>job100001</job>  <!--战士-->
+        <job>job300002</job>  <!--战士-->
     </data>
 
     <respond>
 
         <form src = "respond/base.xml"/>
 
+
         <item input="爱丽丝" >
             <output>爱丽丝是我的母亲</output>
             <output>我源于她</output>
         </item>
-
-
 
     </respond>
 

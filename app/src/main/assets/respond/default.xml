@@ -1,0 +1,18 @@
+
+<respond>
+
+
+
+    <item input="你的名字" >
+        <output>我叫@name</output>
+        <output>@name</output>
+    </item>
+
+
+    <item input="你的职业" >
+        <output>我是一名@job</output>
+        <output>@job</output>
+    </item>
+
+
+</respond>
