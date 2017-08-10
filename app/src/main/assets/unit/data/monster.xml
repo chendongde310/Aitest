@@ -1,0 +1,9 @@
+<monster>
+
+    <item id = "m000001" name = "陆行鸟" lv = "1" loc = "荒野之原"  />
+    <item id = "m000002" name = "巨蜥鳄" lv = "2" loc = "无人沼泽"  />
+
+
+
+
+</monster>

@@ -2,7 +2,7 @@
 
 
     <intent name="query_monster_info" depict="想知道某个怪物的信息" error="抱歉，我不知道" mode="function"
-        reply="正在查询">
+        reply="query_monster_info">
         <slot>
             <item name="monster_name" depict="怪物名称" error="我从未听说有这种怪物，是不是你弄错了？" lib="monster"
                 needful="0">
@@ -45,4 +45,5 @@
 
         </samples>
     </intent>
+
 </root>
