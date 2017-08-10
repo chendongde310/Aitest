@@ -45,17 +45,21 @@ public class PronounHandler {
 
     public static Map<String, Intent.Samples> loop(Map<String, Intent.Samples> samplesMap) {
         Map<String, Intent.Samples> map = new HashMap<>();
-        for (Intent.Samples samples:samplesMap.values()){
-
-            for (Intent.Samples.Nlp nlp:samples.nlps.values()) {
-                if(pronouns.containsKey(nlp.key)) {
+        for (Intent.Samples samples : samplesMap.values()) {
+            Intent.Samples newssamples = new Intent.Samples();
+            for (Intent.Samples.Nlp nlp : samples.nlps.values()) {
+                Map<String, Intent.Samples.Nlp> nlps = new HashMap<>();
+                if (pronouns.containsKey(nlp.key)) {
                     for (String content : pronouns.get(nlp.key)) {
                         Intent.Samples.Nlp newsnlp = new Intent.Samples.Nlp();
-                        newsnlp.key = content ;
-                        newsnlp.slot = nlp .slot;
+                        newsnlp.key = content;
+                        newsnlp.slot = nlp.slot;
+                        nlps.put(newsnlp.key, newsnlp);
+                        newssamples.name = samples.name.replace(nlp.key, content);
                     }
                 }
             }
+            map.put(newssamples.name, newssamples);
         }
         return samplesMap;
     }
