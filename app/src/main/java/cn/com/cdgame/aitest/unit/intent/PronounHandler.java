@@ -61,7 +61,7 @@ public class PronounHandler {
             }
             map.put(newssamples.name, newssamples);
         }
-        return samplesMap;
+        return map;
     }
 
 
