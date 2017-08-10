@@ -1,7 +1,7 @@
 <root>
 
 
-    <intent name="query_monster_info" depict="想知道某个怪物的信息" error="抱歉，我不知道" mode="function"
+    <intent name="query_monster_info" depict="想知道某个怪物的信息" error="抱歉，你提供的信息太少了，我帮不了你" mode="function"
         reply="query_monster_info">
         <slot>
             <item name="monster_name" depict="怪物名称" error="我从未听说有这种怪物，是不是你弄错了？" lib="monster"
@@ -12,19 +12,22 @@
 
             <item name="monster_lv" depict="怪物等级" error="我从未听说有这种级别怪物，是不是你弄错了？" lib="monster"
                 needful="1">
-                <a>它是多少级的生物？</a>
-                <a>你想了解的这只怪物是多少级的生物？</a>
+                <a>那它是多少级的生物？</a>
+                <a>好吧，你想了解的这只怪物是多少级的生物？</a>
             </item>
 
             <item name="monster_loc" depict="怪物出没地址" error="我从未听说这个地方，是不是你弄错了？" lib="monster"
                 needful="1">
-                <a>你知道它出现在哪里吗？</a>
+                <a>你知道它在哪里出现吗？</a>
                 <a>你知道这只怪物是属于哪里的吗？</a>
             </item>
 
         </slot>
 
         <samples>
+
+            <sample name="我想了解一下一些怪物的信息" />
+            <sample name="怪物信息" />
             <sample name="@monster_name">
                 <nlp slot="monster_name">@monster_name</nlp>
             </sample>

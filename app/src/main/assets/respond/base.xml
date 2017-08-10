@@ -24,7 +24,7 @@
     </item>
 
 
-    <item input="陆行鸟" type="b">
+    <item input="陆行鸡" type="b">
         <output condition="time_night">在猎人营地</output>
     </item>
 

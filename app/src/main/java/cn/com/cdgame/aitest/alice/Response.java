@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.hankcs.hanlp.HanLP;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,9 +74,8 @@ public class Response {
         for (int i = 0; i < aliceR.items.size(); i++) {
             if (!TextUtils.isEmpty(aliceR.items.get(i).input)){
                 Pattern p = Pattern.compile(aliceR.items.get(i).input);
-//                Matcher m = p.matcher(terms.get(0).word);
-                Matcher m =  p.matcher(HanLP.extractKeyword(request,1).get(0));
-
+                List<String> keyList = HanLP.extractKeyword(request,1);
+                Matcher m =  p.matcher(keyList.size()>0?keyList.get(0):request);
                 if (m.find()) {
                     return aliceR.items.get(i);
                 }

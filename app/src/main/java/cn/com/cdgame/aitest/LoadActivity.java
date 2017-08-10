@@ -13,6 +13,9 @@ public class LoadActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load);
 
+
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {

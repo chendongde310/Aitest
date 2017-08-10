@@ -16,6 +16,8 @@ import java.util.List;
 import cn.com.cdgame.aitest.bean.Condition;
 import cn.com.cdgame.aitest.bean.Respond;
 import cn.com.cdgame.aitest.modle.ModleHandler;
+import cn.com.cdgame.aitest.unit.bean.Intent;
+import cn.com.cdgame.aitest.unit.intent.IntentHelper;
 
 /**
  * Author：陈东
@@ -32,8 +34,11 @@ public class Alice {
     Emotion emotion;
     Friendliness friendliness;
     Respond aliceR;
+    Intent intent = new Intent();
+    boolean newIntent = true;
 
     public Alice() {
+
     }
 
     private Alice(Bulider b) {
@@ -45,17 +50,30 @@ public class Alice {
         emotion = b.emotion;
         friendliness = b.friendliness;
         aliceR = b.aliceR;
+
     }
 
-    public void talk(String request, TalkCallback talkCallback) {
+    public void talk(final String request, final TalkCallback talkCallback) {
 
-        talkCallback.respond( new Response(new Request(request).getRequest(),this).toText());
+        if (intent==null||newIntent) {
+            newIntent = false;
+            intent = IntentHelper.helper().getIntent(request);
+        }
+        if(intent ==null){
+            talkCallback.respond( new Response(new Request(request).getRequest(),Alice.this).toText());
+        }
+        if (intent != null) {
+            talkCallback.respond(intent.run(request, new Intent.IntentCallback() {
+                @Override
+                public void end() {
+                    newIntent = true;
+                }
+            }));
+
+        }
+
+        // talkCallback.respond( new Response(new Request(request).getRequest(),this).toText());
     }
-
-
-
-
-
 
 
     public static class Bulider {
@@ -104,7 +122,7 @@ public class Alice {
                 Document document = reader.read(context.getApplicationContext().getAssets().open(path));
 
                 return loadRespond(document.getRootElement());
-            }else {
+            } else {
                 return null;
             }
         }

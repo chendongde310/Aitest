@@ -3,6 +3,7 @@ package cn.com.cdgame.aitest;
 import android.app.Application;
 
 import cn.com.cdgame.aitest.modle.ModleHandler;
+import cn.com.cdgame.aitest.unit.intent.IntentHelper;
 
 /**
  * 作者：陈东  —  www.renwey.com
@@ -19,5 +20,6 @@ public class App extends Application {
         app = this;
 
         ModleHandler.initModle(this);
+        IntentHelper.initHelper(this);
     }
 }
