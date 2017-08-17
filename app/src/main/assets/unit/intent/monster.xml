@@ -1,6 +1,5 @@
 <root>
 
-
     <intent name="query_monster_info" depict="想知道某个怪物的信息" error="抱歉，你提供的信息太少了，我帮不了你" mode="function"
         reply="query_monster_info">
         <slot>
